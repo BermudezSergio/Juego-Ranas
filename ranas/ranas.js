@@ -4,37 +4,42 @@
 function mueveRana(el)
 {
 	var id_el = parseInt(el.id, 10); //Parse Integer (Base 10).
-	if (document.getElementById(el.id).src.includes("???")) //Get image L.png, B.png or R.png
+	if (document.getElementById(id_el).src.includes("static/L.png")) //Get image L.png, B.png or R.png
 	{
 //		It is a Left Frog
 		
 		//Can I move straight forward?
-		if(???) 
+	
+		if(document.getElementById(id_el+1).src.includes("static/B.png"))
 		{
-//			alert("Moving the frog forward!")
-			frog_swap(id_el,id_el+1)
+				
+				frog_swap(id_el,id_el+1)
+				
 		} else {
+			
 			// Can I jump forward on a frog?
-			if(???) 
+			if(document.getElementById(id_el+2).src.includes("static/B.png")) 
 			{
 //				alert("Moving the frog forward on a frog!")
-				???
+				frog_swap(id_el,id_el+2)
 			}		
 		}
 		
 	} else { 
-		if (document.getElementById(el.id).src.includes("???")) //Get image L.png, B.png or R.png
+		if (document.getElementById(id_el).src.includes("static/R.png")) //Get image L.png, B.png or R.png
 		{	
+			
 		// It's a Rigth Frog
-			if(???) 
+			if(document.getElementById(id_el-1).src.includes("static/B.png"))
 			{
-//				alert("Moving the frog forward!")
-				???
+				
+				frog_swap(id_el,id_el-1)
+
 			} else {
-				if(???) 
+				if(document.getElementById(id_el-2).src.includes("static/B.png"))
 			{
 //				alert("Moving the frog forward!")
-				???
+				frog_swap(id_el,id_el-2)
 			}		
 		}
 			
@@ -52,9 +57,18 @@ function mueveRana(el)
 */
 function frog_swap(i,j)
 {
-	???
-	???
-	???
+	i = parseInt(i);
+	j = parseInt(j);
+	var ranaI = document.getElementById(i);				
+	var ranaJ = document.getElementById(j);				
+	var srcAux=ranaI.src;
+	ranaI.src=ranaJ.src;
+	ranaJ.src=srcAux;	
+	last_i = i;
+	last_j = j;
+	if(checkWin() ==0){
+		chequeaBloqueo();
+	}
 }
 
 
@@ -72,9 +86,26 @@ function refreshPage(){
 */
 function checkWin() {
    
-    var derecha = ???
+    var derecha = false;
+	var izquierda =  false;
 
-    var izquierda = ???
+	if(document.getElementById("0").src.includes("static/R.png") && 
+		document.getElementById("1").src.includes("static/R.png") &&
+	 	document.getElementById("2").src.includes("static/R.png")){
+
+		izquierda=true;
+	 }
+
+
+	 if(document.getElementById("4").src.includes("static/L.png") && 
+		document.getElementById("5").src.includes("static/L.png") &&
+	 	document.getElementById("6").src.includes("static/L.png")){
+
+		derecha=true;
+	 }
+
+
+
 
     if (derecha && izquierda) {
         setTimeout(()=>{
